@@ -1,6 +1,156 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+.header .siteName a {
+  font-size: 2em; /* Aumenta o tamanho da fonte para CSE Motors */
+}
+
+#tools a {
+  font-size: 1.0em; /* Aumenta o tamanho da fonte para My Account */
+}
+
+/* Fundo xadrez */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(45deg, #000000 25%, transparent 25%, transparent 50%, #000000 50%, #000000 75%, transparent 75%, transparent);
+  z-index: -1; /* Coloca o fundo atrás do conteúdo */
+}
+
+/* Estilo do contêiner */
+.container {
+  width: 80%;
+  margin: 20px auto; /* Centraliza e adiciona espaço em cima */
+  border: 5px solid #0000ff; /* Borda azul */
+  padding: 20px;
+  background-color: #ffffff; /* Fundo branco */
+  border-radius: 8px; /* Bordas arredondadas */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid #000000;
+  padding-bottom: 10px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.nav {
+  background-color: #000000; /* Fundo preto */
+  padding: 10px 0; /* Espaçamento vertical */
+}
+
+.nav ul {
+  display: flex; /* Exibe os itens da lista em linha */
+  justify-content: center; /* Centraliza os itens */
+  padding: 0; /* Remove o padding padrão */
+  margin: 0; /* Remove a margem padrão */
+  list-style-type: none; /* Remove os marcadores da lista */
+}
+
+.nav li {
+  margin: 0 15px; /* Margem entre os itens */
+}
+
+.nav a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: #ffffff; /* Texto branco */
+  letter-spacing: 2px; /* Aumenta o espaço entre as letras */
+}
+
+.main-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.main-content h2 {
+  color: #0000ff;
+}
+
+.main-content .button {
+  background-color: #00bfff;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.content .column {
+  width: 48%;
+}
+
+/* Estilo para Batmobile Upgrades */
+.content .upgrades {
+  display: flex;
+  flex-direction: column; /* Empilha as imagens verticalmente */
+}
+
+.content .upgrades .item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #add8e6; /* Azul mais claro */
+  padding: 10px; /* Adiciona padding ao redor dos itens */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+.content .upgrades .item img {
+  margin-right: 10px;
+  width: 100px; /* Tamanho fixo para as imagens */
+  height: 100px; /* Tamanho fixo para as imagens */
+}
+
+.content .column h3 {
+  border-bottom: 2px solid #000000;
+  padding-bottom: 5px;
+  font-size: 1.5em; /* Aumenta o tamanho da fonte para os títulos */
+}
+
+.content .reviews p {
+  font-size: 1.7em; /* Aumenta o tamanho da fonte para as reviews */
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 2px solid #000000;
+}
+
+.description {
+  position: absolute;
+  top: 20px;
+  left: 308px; /* Aumenta a margem esquerda para mover mais para a direita */
+  background-color: rgba(255, 255, 255, 0.5); /* Fundo semi-transparente */
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.button {
+  display: inline-block; /* Para o botão se comportar como um bloco */
+  margin-top: 10px; /* Espaço acima do botão */
 }
