@@ -154,3 +154,69 @@ body::before {
   display: inline-block; /* Para o botão se comportar como um bloco */
   margin-top: 10px; /* Espaço acima do botão */
 }
+
+/* CSS existente aqui... */
+
+/* Media Query para telas menores */
+@media (max-width: 768px) {
+  .container {
+    width: 90%; /* Aumenta a largura do contêiner em telas menores */
+    padding: 10px; /* Reduz o padding */
+  }
+
+  .header .siteName a {
+    font-size: 1.5em; /* Reduz o tamanho da fonte para CSE Motors */
+  }
+
+  #tools a {
+    font-size: 1.0em; /* Mantém o tamanho da fonte para My Account */
+  }
+
+  .nav ul {
+    justify-content: space-between; /* Mantém os itens da nav lado a lado */
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha se necessário */
+  }
+
+  .nav li {
+    margin: 0 10px; /* Margem entre os itens */
+  }
+
+  .main-content {
+    flex-direction: column; /* Muda para coluna */
+    align-items: center; /* Centraliza os itens */
+}
+
+.description {
+  position: absolute;
+  top: 40px;
+  left: 20px; /* Aumenta a margem esquerda para mover mais para a direita */
+  background-color: rgba(255, 255, 255, 0.5); /* Fundo semi-transparente */
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+
+  .main-content img {
+    margin: 20px 0; /* Adiciona espaço acima e abaixo da imagem */
+    width: 100%; /* A imagem ocupará toda a largura disponível */
+    max-width: 600px; /* Mantém o tamanho máximo da imagem */
+}
+
+
+  .content {
+    flex-direction: column; /* Empilha as colunas verticalmente */
+    padding: 10px 0; /* Reduz o padding */
+  }
+
+  .content .column {
+    width: 100%; /* Faz as colunas ocuparem a largura total */
+    margin-bottom: 20px; /* Adiciona espaço entre as colunas */
+  }
+
+  .content .reviews p {
+    font-size: 1.5em; /* Reduz o tamanho da fonte das reviews */
+  }
+
+}
