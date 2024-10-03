@@ -1,24 +1,21 @@
+<!-- **********************************
+* Content Heading Section
+* Displays the title as the main heading of the page
+*********************************** -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <%- res.redirect('/') %> <!-- Redirects to the home page if there is no title -->
+<% } %>
 
-    <!-- **********************************
-    * Content Heading Section
-    * Displays the title as the main heading of the page
-    *********************************** -->
-    <% if (title) { %>
-        <h1><%= title %></h1>
-    <% } else { %>
-        <%- res.redirect('/') %> <!-- Redireciona para a página inicial se não houver título -->
-    <% } %>
+<!-- **********************************
+* Message Section (Commented Out)
+* Displays any messages or alerts (future implementation)
+*********************************** -->
+<%# messages() %> <!-- This code is commented out and will be enabled in the future -->
 
-    <!-- **********************************
-    * Message Section (Commented Out)
-    * Displays any messages or alerts (future implementation)
-    *********************************** -->
-    <%# messages() %> <!-- Este código está comentado e será habilitado no futuro -->
-
-    <!-- **********************************
-    * Inventory Items Display Section
-    * Displays the inventory grid, which contains vehicles information
-    *********************************** -->
-  
-        <%- grid %> <!-- Exibe o grid gerado dinamicamente com HTML -->
-
+<!-- **********************************
+* Inventory Items Display Section
+* Displays the inventory grid, which contains vehicles information
+*********************************** -->
+<%- grid %> <!-- Displays the dynamically generated grid with HTML -->
