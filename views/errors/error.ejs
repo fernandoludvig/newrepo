@@ -1,0 +1,34 @@
+<!-- Error View for displaying errors -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <!-- **********************************
+    * Content Heading Section
+    * Displays the title as the main heading of the page
+    *********************************** -->
+    <% if (title) { %>
+        <h1><%= title %></h1>
+    <% } else { %>
+        <%- res.redirect('/') %> <!-- Redirect to home if no title -->
+    <% } %>
+
+    <!-- **********************************
+    * Message Section (Commented Out)
+    * Displays any messages or alerts (future implementation)
+    *********************************** -->
+    <%# messages() %> <!-- This code is commented out and will be enabled in the future -->
+
+    <!-- **********************************
+    * Error Details Section
+    * Displays the error message passed from the error handler
+    *********************************** -->
+    <h2>Error Details:</h2>
+    <p><%- message %></p> <!-- Displays the error message -->
+</body>
+</html>
