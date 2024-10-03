@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <!-- **********************************
+    * Content Heading Section
+    * Displays the title as the main heading of the page
+    *********************************** -->
+    <% if (title) { %>
+        <h1><%= title %></h1>
+    <% } else { %>
+        <%- res.redirect('/') %> <!-- Redireciona para a página inicial se não houver título -->
+    <% } %>
+
+    <!-- **********************************
+    * Message Section (Commented Out)
+    * Displays any messages or alerts (future implementation)
+    *********************************** -->
+    <%# messages() %> <!-- Este código está comentado e será habilitado no futuro -->
+
+    <!-- **********************************
+    * Inventory Items Display Section
+    * Displays the inventory grid, which contains vehicles information
+    *********************************** -->
+    <section id="inv-display">
+        <%- grid %> <!-- Exibe o grid gerado dinamicamente com HTML -->
+    </section>
+
+</body>
+</html>
