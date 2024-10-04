@@ -220,3 +220,129 @@ body::before {
   }
 
 }
+/* Estilo para o inv-display - lista de inventário */
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none; /* Remove marcadores de lista */
+  padding: 0;
+}
+
+#inv-display li {
+  width: 300px;
+  margin: 10px;
+  border: 2px solid #000000; /* Borda preta ao redor de cada item */
+  border-radius: 8px; /* Bordas arredondadas */
+  text-align: center;
+  background-color: #f5f5f5; /* Fundo claro */
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+#inv-display img {
+  width: 100%; /* Imagem ocupa a largura total do item */
+  height: auto; /* Mantém proporção da imagem */
+  border-bottom: 1px solid #ddd; /* Linha separando a imagem do restante do conteúdo */
+}
+
+.namePrice h2 {
+  font-size: 1.2em;
+  color: #0000ff;
+  margin: 10px 0;
+}
+
+.namePrice span {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #00bfff;
+}
+
+@media (max-width: 768px) {
+  #inv-display {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #inv-display li {
+    width: 90%; /* Os itens ocupam quase toda a largura da tela */
+  }
+}
+.vehicle-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.vehicle-image {
+  max-width: 50%;
+  height: auto;
+}
+
+.vehicle-details {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .vehicle-detail-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .vehicle-image {
+      max-width: 100%;
+  }
+}
+/* Estilo específico para a página de detalhes do veículo */
+.vehicle-detail-page {
+  font-family: Arial, sans-serif; /* Define a fonte para esta página */
+  background-color: #f0f0f0; /* Cor de fundo diferente */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Usando flexbox para centralizar o contêiner */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 100vh; /* Altura total da viewport */
+}
+
+/* Estilo para o contêiner de detalhes do veículo */
+.vehicle-detail-container {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #000000; /* Borda preta ao redor do contêiner */
+  border-radius: 8px; /* Bordas arredondadas */
+  background-color: #ffffff; /* Fundo branco */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra leve */
+  max-width: 1200px; /* Largura máxima para o contêiner */
+  height: auto; /* Altura automática para manter o conteúdo */
+}
+
+/* Estilo para a imagem do veículo */
+.vehicle-image {
+  max-width: 400px; /* Aumenta a largura máxima da imagem */
+  height: auto; /* Mantém proporção da imagem */
+  margin-right: 20px; /* Espaço entre a imagem e os detalhes */
+}
+
+/* Estilo para os detalhes do veículo */
+.vehicle-details {
+  max-width: 350px; /* Diminui a largura para os detalhes */
+  padding: 20px;
+  text-align: left; /* Alinha o texto à esquerda */
+  font-family: 'Arial', sans-serif; /* Fonte moderna */
+  line-height: 1.6; /* Aumenta o espaçamento entre linhas */
+}
+
+/* Media Query para telas menores */
+@media (max-width: 768px) {
+  .vehicle-detail-container {
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens */
+  }
+
+  .vehicle-image {
+    max-width: 100%;
+  }
+}
