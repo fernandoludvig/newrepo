@@ -14,6 +14,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute"); // Import inventory route
 const utilities = require("./utilities/"); // Certifique-se de que o arquivo utilities está sendo importado
+const errorHandler = require("./middleware/errorHandler"); // Import your error handler
 
 /* ***********************
  * View Engine and Templates
@@ -34,27 +35,10 @@ app.get("/", utilities.handleErrors(baseController.buildHome)); // Wrap with err
 app.use("/inv", inventoryRoute);
 
 /* ***********************
- * Express Error Handler
+ * Error Handling Middleware
  * Place after all other middleware
  *************************/
-app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav();
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-  
-  // Check for 404 status code
-  let message;
-  if (err.status === 404) {
-    message = err.message;
-  } else {
-    message = 'Oh no! There was a crash. Maybe try a different route?';
-  }
-  
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
-    message,
-    nav
-  });
-});
+app.use(errorHandler); // Use the custom error handler
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

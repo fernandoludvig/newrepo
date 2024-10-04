@@ -1,34 +1,25 @@
-<!-- Error View for displaying errors -->
+<!-- views/error.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title><%= title || 'Error' %></title> <!-- Default title if not provided -->
     <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <!-- **********************************
-    * Content Heading Section
-    * Displays the title as the main heading of the page
-    *********************************** -->
+    <!-- Content Heading Section -->
     <% if (title) { %>
         <h1><%= title %></h1>
     <% } else { %>
-        <%- res.redirect('/') %> <!-- Redirect to home if no title -->
+        <h1>Error</h1> <!-- Default heading for error -->
     <% } %>
 
-    <!-- **********************************
-    * Message Section (Commented Out)
-    * Displays any messages or alerts (future implementation)
-    *********************************** -->
-    <%# messages() %> <!-- This code is commented out and will be enabled in the future -->
-
-    <!-- **********************************
-    * Error Details Section
-    * Displays the error message passed from the error handler
-    *********************************** -->
+    <!-- Error Details Section -->
     <h2>Error Details:</h2>
-    <p><%- message %></p> <!-- Displays the error message -->
+    <p><%- message %></p> <!-- This uses <%- to safely render unescaped HTML -->
+
+    <!-- Link to go back to home page -->
+    <a href="/">Go Back Home</a>
 </body>
 </html>
