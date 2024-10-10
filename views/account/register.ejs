@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/register.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <header>
+        <h1><%= title %></h1>
+        <% if (messages && messages.length > 0) { %>
+            <div class="flash-message">
+                <% messages.forEach(message => { %>
+                    <p><%= message %></p>
+                <% }) %>
+            </div>
+        <% } %>        
+    </header>
+    
+    <main>
+        <div class="container">
+            <form action="/account/register" method="POST" id="registration-form">
+                <div>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required data-trail="firstName" />
+                </div>
+                <div>
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required data-trail="lastName" />
+                </div>
+                <div>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required data-trail="email" />
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required data-trail="password" />
+                    <div style="display: flex; align-items: center; margin-top: 5px;">
+                        <input type="checkbox" id="toggle-password" onclick="togglePassword()" style="margin-right: 5px;">
+                        <label for="toggle-password">Show Password</label>
+                    </div>
+                </div>
+                <p>
+                    <strong>Requirements:</strong>
+                    <ul>
+                        <li>12 characters minimum</li>
+                        <li>At least 1 capital letter</li>
+                        <li>At least 1 number</li>
+                        <li>At least 1 special character</li>
+                    </ul>
+                </p>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleCheckbox = document.getElementById('toggle-password');
+            passwordInput.type = toggleCheckbox.checked ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>

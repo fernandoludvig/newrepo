@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .header .siteName a {
   font-size: 2em; /* Aumenta o tamanho da fonte para CSE Motors */
 }
@@ -22,6 +23,13 @@ body::before {
   bottom: 0;
   background-image: linear-gradient(45deg, #000000 25%, transparent 25%, transparent 50%, #000000 50%, #000000 75%, transparent 75%, transparent);
   z-index: -1; /* Coloca o fundo atrás do conteúdo */
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5em; /* Aumenta o tamanho da fonte para destaque */
+  margin: 0;
+  margin-top: 30px;
 }
 
 /* Estilo do contêiner */
@@ -155,71 +163,67 @@ body::before {
   margin-top: 10px; /* Espaço acima do botão */
 }
 
-/* CSS existente aqui... */
-
 /* Media Query para telas menores */
 @media (max-width: 768px) {
   .container {
-    width: 90%; /* Aumenta a largura do contêiner em telas menores */
-    padding: 10px; /* Reduz o padding */
+      width: 90%; /* Aumenta a largura do contêiner em telas menores */
+      padding: 10px; /* Reduz o padding */
   }
 
   .header .siteName a {
-    font-size: 1.5em; /* Reduz o tamanho da fonte para CSE Motors */
+      font-size: 1.5em; /* Reduz o tamanho da fonte para CSE Motors */
   }
 
   #tools a {
-    font-size: 1.0em; /* Mantém o tamanho da fonte para My Account */
+      font-size: 1.0em; /* Mantém o tamanho da fonte para My Account */
   }
 
   .nav ul {
-    justify-content: space-between; /* Mantém os itens da nav lado a lado */
-    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha se necessário */
+      justify-content: space-between; /* Mantém os itens da nav lado a lado */
+      flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha se necessário */
   }
 
   .nav li {
-    margin: 0 10px; /* Margem entre os itens */
+      margin: 0 10px; /* Margem entre os itens */
   }
 
   .main-content {
-    flex-direction: column; /* Muda para coluna */
-    align-items: center; /* Centraliza os itens */
-}
+      flex-direction: column; /* Muda para coluna */
+      align-items: center; /* Centraliza os itens */
+  }
 
-.description {
-  position: absolute;
-  top: 40px;
-  left: 20px; /* Aumenta a margem esquerda para mover mais para a direita */
-  background-color: rgba(255, 255, 255, 0.5); /* Fundo semi-transparente */
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
+  .description {
+      position: absolute;
+      top: 40px;
+      left: 20px; /* Aumenta a margem esquerda para mover mais para a direita */
+      background-color: rgba(255, 255, 255, 0.5); /* Fundo semi-transparente */
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+  }
 
   .main-content img {
-    margin: 20px 0; /* Adiciona espaço acima e abaixo da imagem */
-    width: 100%; /* A imagem ocupará toda a largura disponível */
-    max-width: 600px; /* Mantém o tamanho máximo da imagem */
-}
-
+      margin: 20px 0; /* Adiciona espaço acima e abaixo da imagem */
+      width: 100%; /* A imagem ocupará toda a largura disponível */
+      max-width: 600px; /* Mantém o tamanho máximo da imagem */
+  }
 
   .content {
-    flex-direction: column; /* Empilha as colunas verticalmente */
-    padding: 10px 0; /* Reduz o padding */
+      flex-direction: column; /* Empilha as colunas verticalmente */
+      padding: 10px 0; /* Reduz o padding */
   }
 
   .content .column {
-    width: 100%; /* Faz as colunas ocuparem a largura total */
-    margin-bottom: 20px; /* Adiciona espaço entre as colunas */
+      width: 100%; /* Faz as colunas ocuparem a largura total */
+      margin-bottom: 20px; /* Adiciona espaço entre as colunas */
   }
 
   .content .reviews p {
-    font-size: 1.5em; /* Reduz o tamanho da fonte das reviews */
+      font-size: 1.5em; /* Reduz o tamanho da fonte das reviews */
   }
-
 }
+
 /* Estilo para o inv-display - lista de inventário */
 #inv-display {
   display: flex;
@@ -260,14 +264,15 @@ body::before {
 
 @media (max-width: 768px) {
   #inv-display {
-    flex-direction: column;
-    align-items: center;
+      flex-direction: column;
+      align-items: center;
   }
 
   #inv-display li {
-    width: 90%; /* Os itens ocupam quase toda a largura da tela */
+      width: 90%; /* Os itens ocupam quase toda a largura da tela */
   }
 }
+
 .vehicle-detail-container {
   display: flex;
   flex-wrap: wrap;
@@ -285,64 +290,12 @@ body::before {
 
 @media (max-width: 768px) {
   .vehicle-detail-container {
-      flex-direction: column;
-      align-items: center;
+      flex-direction: column; /* Empilha os detalhes da imagem e informações */
+      align-items: center; /* Centraliza os itens */
   }
 
   .vehicle-image {
-      max-width: 100%;
-  }
-}
-/* Estilo específico para a página de detalhes do veículo */
-.vehicle-detail-page {
-  font-family: Arial, sans-serif; /* Define a fonte para esta página */
-  background-color: #f0f0f0; /* Cor de fundo diferente */
-  margin: 0;
-  padding: 0;
-  display: flex; /* Usando flexbox para centralizar o contêiner */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: 100vh; /* Altura total da viewport */
-}
-
-/* Estilo para o contêiner de detalhes do veículo */
-.vehicle-detail-container {
-  display: flex;
-  justify-content: center; /* Centraliza o conteúdo horizontalmente */
-  margin: 20px;
-  padding: 20px;
-  border: 2px solid #000000; /* Borda preta ao redor do contêiner */
-  border-radius: 8px; /* Bordas arredondadas */
-  background-color: #ffffff; /* Fundo branco */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra leve */
-  max-width: 1200px; /* Largura máxima para o contêiner */
-  height: auto; /* Altura automática para manter o conteúdo */
-}
-
-/* Estilo para a imagem do veículo */
-.vehicle-image {
-  max-width: 400px; /* Aumenta a largura máxima da imagem */
-  height: auto; /* Mantém proporção da imagem */
-  margin-right: 20px; /* Espaço entre a imagem e os detalhes */
-}
-
-/* Estilo para os detalhes do veículo */
-.vehicle-details {
-  max-width: 350px; /* Diminui a largura para os detalhes */
-  padding: 20px;
-  text-align: left; /* Alinha o texto à esquerda */
-  font-family: 'Arial', sans-serif; /* Fonte moderna */
-  line-height: 1.6; /* Aumenta o espaçamento entre linhas */
-}
-
-/* Media Query para telas menores */
-@media (max-width: 768px) {
-  .vehicle-detail-container {
-    flex-direction: column;
-    align-items: center; /* Centraliza os itens */
-  }
-
-  .vehicle-image {
-    max-width: 100%;
+      max-width: 100%; /* Imagem ocupa toda a largura */
+      margin-bottom: 20px; /* Adiciona espaço abaixo da imagem */
   }
 }

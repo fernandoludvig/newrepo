@@ -1,56 +1,58 @@
 
-            <div class="container">
-                <header class="header" id="top-header">
-                    <span class="siteName">
-                        <a href="/" title="Return to home page">CSE Motors</a>
-                    </span>
-                    <div id="tools">
-                        <a title="Click to log in" href="/account/login">My Account</a>
-                    </div>
-                </header>
-                <nav class="nav">
-                    <%- include('partials/navigation') %>
-                </nav>
-                <div class="main-content" style="position: relative;">
-                    <div class="description">
-                        <h3>Batmobile</h3>
-                        <p>2 Cup holders<br>Batman doors<br>Fuzzy dice!</p>
-                        <a class="button" href="#">Own Today</a>
-                    </div>
-                    <img alt="Batmobile car illustration" src="/images/vehicles/batmobile.jpg" style="width: 100%; max-width: 600px; height: 300px;">
-                </div>
-                <div class="content">
-                    <div class="column upgrades">
-                        <h3>Batmobile Upgrades</h3>
-                        <div class="item">
-                            <img alt="Flux Capacitor" src="/images/upgrades/flux-cap.png">
-                            <p>Flux Capacitor</p>
-                        </div>
-                        <div class="item">
-                            <img alt="Flame Decals" src="/images/upgrades/flame.jpg">
-                            <p>Flame Decals</p>
-                        </div>
-                        <div class="item">
-                            <img alt="Bumper Stickers" src="/images/upgrades/bumper_sticker.jpg">
-                            <p>Bumper Stickers</p>
-                        </div>
-                        <div class="item">
-                            <img alt="Hub Caps" src="/images/upgrades/hub-cap.jpg">
-                            <p>Hub Caps</p>
-                        </div>
-                    </div>
-                    <div class="column reviews">
-                        <h3>Batmobile Reviews</h3>
-                        <p><strong>“So fast it’s almost like traveling in time.”</strong> (4/5)</p>
-                        <p><strong>“Coolest ride on the road.”</strong> (4/5)</p>
-                        <p><strong>“I’m feeling like Batman!”</strong> (5/5)</p>
-                        <p><strong>“The most futuristic ride of our day.”</strong> (4.5/5)</p>
-                        <p><strong>“80’s livin and I love it!”</strong> (5/5)</p>
-                        <p><strong>“A dream come true for every superhero fan!”</strong> (5/5)</p>
-                        <p><strong>“Style and speed wrapped in one!”</strong> (4.8/5)</p>
-                        <p><strong>“Unmatched performance and design!”</strong> (5/5)</p>
-                    </div>
-                </div>
+
+<div class="container">
+    <header class="header" id="top-header">
+        <span class="siteName">
+            <a href="/" title="Return to home page">CSE Motors</a>
+        </span>
+        <div id="tools">
+            <a title="Click to log in" href="account/">My Account</a>
+        </div>
+        
+    </header>
+    <nav class="nav">
+        <%- include('partials/navigation') %>
+    </nav>
+    <h1>Welcome to CSE Motors</h1>
+    <%- messages() %> <!-- This renders the flash messages -->
+    <div class="main-content" style="position: relative;">
+        <div class="description">
+            <h3>Batmobile</h3>
+            <p>2 Cup holders<br>Batman doors<br>Fuzzy dice!</p>
+            <a class="button" href="#">Own Today</a>
+        </div>
+        <img alt="Batmobile car illustration" src="/images/vehicles/batmobile.jpg" style="width: 100%; max-width: 600px; height: 300px;">
+    </div>
+    <div class="content">
+        <div class="column upgrades">
+            <h3>Batmobile Upgrades</h3>
+            <div class="item">
+                <img alt="Flux Capacitor" src="/images/upgrades/flux-cap.png">
+                <p>Flux Capacitor</p>
             </div>
-
-
+            <div class="item">
+                <img alt="Flame Decals" src="/images/upgrades/flame.jpg">
+                <p>Flame Decals</p>
+            </div>
+            <div class="item">
+                <img alt="Bumper Stickers" src="/images/upgrades/bumper_sticker.jpg">
+                <p>Bumper Stickers</p>
+            </div>
+            <div class="item">
+                <img alt="Hub Caps" src="/images/upgrades/hub-cap.jpg">
+                <p>Hub Caps</p>
+            </div>
+        </div>
+        <div class="column reviews">
+            <h3>Batmobile Reviews</h3>
+            <p><strong>“So fast it’s almost like traveling in time.”</strong> (4/5)</p>
+            <p><strong>“Coolest ride on the road.”</strong> (4/5)</p>
+            <p><strong>“I’m feeling like Batman!”</strong> (5/5)</p>
+            <p><strong>“The most futuristic ride of our day.”</strong> (4.5/5)</p>
+            <p><strong>“80’s livin and I love it!”</strong> (5/5)</p>
+            <p><strong>“A dream come true for every superhero fan!”</strong> (5/5)</p>
+            <p><strong>“Style and speed wrapped in one!”</strong> (4.8/5)</p>
+            <p><strong>“Unmatched performance and design!”</strong> (5/5)</p>
+        </div>
+    </div>
+</div>
