@@ -73,3 +73,24 @@ a {
 a:hover {
     text-decoration: underline; /* Underline on hover */
 }
+
+.requirements {
+    background-color: #e7f3fe; /* Light blue background */
+    color: #31708f; /* Dark blue text */
+    padding: 10px; /* Padding around the requirements */
+    border: 1px solid #bce8f1; /* Light blue border */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Space above the requirements */
+    font-size: 14px; /* Font size */
+}
+
+.requirements ul {
+    padding-left: 20px; /* Indentation for list items */
+    margin: 0; /* Remove default margin */
+    margin-top: 8px;
+}
+
+.requirements li {
+    margin-bottom: 5px; /* Space between list items */
+}
+

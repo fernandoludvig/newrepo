@@ -11,31 +11,43 @@
         <h1><%= title %></h1>
         <% if (messages && messages.length > 0) { %>
             <div class="flash-message">
-                <% messages.forEach(message => { %>
-                    <p><%= message %></p>
-                <% }) %>
+              <% messages.forEach(message => { %>
+                <p><%= message %></p>
+              <% }) %>
             </div>
-        <% } %>        
+          <% } %>
+          
+        
+        <!-- Error Display Block -->
+        <% if (errors) { %>
+          <ul class="notice">
+            <% errors.array().forEach(error => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+        
     </header>
     
     <main>
         <div class="container">
-            <form action="/account/register" method="POST" id="registration-form">
+            <form action="/account/register" method="post" id="registration-form">
                 <div>
                     <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" required data-trail="firstName" />
+                    <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>" />
                 </div>
                 <div>
                     <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" required data-trail="lastName" />
+                    <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>" />
                 </div>
                 <div>
                     <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" required data-trail="email" />
+                    <input type="email" name="account_email" id="accountEmail" required value="<%= locals.account_email %>" />
                 </div>
                 <div>
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required data-trail="password" />
+                    <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, and 1 special character.</span>
+                    <input type="password" id="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" data-trail="password" />
                     <div style="display: flex; align-items: center; margin-top: 5px;">
                         <input type="checkbox" id="toggle-password" onclick="togglePassword()" style="margin-right: 5px;">
                         <label for="toggle-password">Show Password</label>
@@ -54,7 +66,7 @@
             </form>
         </div>
     </main>
-
+    
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');

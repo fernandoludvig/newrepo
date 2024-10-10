@@ -11,12 +11,13 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const session = require("express-session"); // Added session
 const pool = require('./database/'); // Added database connection
+const bodyParser = require("body-parser"); // Added body-parser
 const app = express();
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute"); // Import inventory route
 const accountRoute = require("./routes/accountRoute"); // Add this line for account route
-const utilities = require("./utilities/"); // Certifique-se de que o arquivo utilities está sendo importado
+const utilities = require("./utilities/"); // Ensure the utilities file is being imported
 const errorHandler = require("./middleware/errorHandler"); // Import your error handler
 
 /* ***********************
@@ -39,6 +40,10 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
+
+// Body parser middleware
+app.use(bodyParser.json()); // For parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 
 /* ***********************
  * View Engine and Templates
