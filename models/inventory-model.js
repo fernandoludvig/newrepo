@@ -39,5 +39,18 @@ const getVehicleById = async (vehicleId) => {
     }
 };
 
+// Função para adicionar um novo item ao inventário
+async function addInventory({ inv_make, inv_model, inv_year, classification_id, inv_image, inv_thumbnail }) {
+    try {
+        const query = `
+            INSERT INTO public.inventory (inv_make, inv_model, inv_year, classification_id, inv_image, inv_thumbnail)
+            VALUES ($1, $2, $3, $4, $5, $6)`;
+        await pool.query(query, [inv_make, inv_model, inv_year, classification_id, inv_image, inv_thumbnail]);
+    } catch (error) {
+        console.error("Error adding inventory item:", error);
+        throw error; // Propaga o erro
+    }
+}
+
 // Exportar funções
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById };
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById, addInventory };

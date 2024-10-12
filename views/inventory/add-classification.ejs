@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Classification</title>
+    <script>
+        // Client-side validation
+        function validateForm() {
+            const classificationName = document.getElementById('classificationName').value;
+            const specialChars = /[!@#$%^&*(),.?":{}|<>]/g;
+
+            if (classificationName.trim() === '' || specialChars.test(classificationName)) {
+                alert("Classification name cannot be empty or contain special characters.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Add New Classification</h1>
+
+    <% if (messages.length > 0) { %>
+        <div>
+            <% messages.forEach(function(message) { %>
+                <p><%= message %></p>
+            <% }); %>
+        </div>
+    <% } %>
+
+    <form action="/inv/add-classification" method="POST" onsubmit="return validateForm()">
+        <label for="classificationName">Classification Name:</label>
+        <input type="text" id="classificationName" name="classificationName" required>
+        <button type="submit">Add Classification</button>
+    </form>
+
+    <a href="/inv/">Back to Management</a>
+</body>
+</html>
