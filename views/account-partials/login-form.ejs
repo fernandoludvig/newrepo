@@ -3,12 +3,12 @@
         <%- messages() %>
         <% if (errors) { %>
             <ul class="notice">
-           <% errors.array().forEach(error => { %>
-             <li><%= error.msg %></li>
-          <%  }) %>
-           </ul>
-          <% } %>
-        <form id="account-form" action="/account/login" method="post">
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+        <form id="loginForm" action="/account/login" method="post"> <!-- Make sure action and method are correct -->
             <label class="account-label" for="account_email">Email:</label>
             <br>
             <input type="email" name="account_email" id="user-email" placeholder="email" required
@@ -21,7 +21,7 @@
                 placeholder="password" required>
             <br>
             <div class="button-div">
-                <button>LOGIN</button>
+                <button type="submit">LOGIN</button> <!-- Ensure this is a submit button -->
                 <p class="no-account">No account? <a href="/account/register">Sign-up</a></p>
             </div>
         </form>

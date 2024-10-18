@@ -1,10 +1,11 @@
 /* ******************************************
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
- *******************************************/
+*******************************************/
+
 /* ***********************
- * Require Statements
- *************************/
+* Require Statements
+*************************/
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
@@ -15,14 +16,15 @@ const errorController = require("./controllers/errorController")
 const accountController = require("./controllers/accountController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
-const utilities = require("./utilities")
+const utilities = require("./utilities") // Ensure this line is present
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
- * Middleware
- * ************************/
+* Middleware
+************************/
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -43,28 +45,26 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
+
+// Apply the JWT middleware to all routes
+app.use(utilities.checkJWTToken) // Add this line
 
 /* ***********************
- * View Engine and Templates
- *************************/
+* View Engine and Templates
+*************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not at views root
+app.set("layout", "./layouts/layout")
 
 /* ***********************
- * Routes
- *************************/
+* Routes
+*************************/
 app.use(static)
-// Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
-// Inventory routes
 app.use("/inv", utilities.handleErrors(inventoryRoute))
-// Inventory Detail routes
 app.use("/inv/detail", utilities.handleErrors(inventoryRoute))
-// Account route
 app.use("/account", utilities.handleErrors(accountRoute))
-
-// error route
 app.use("/error", utilities.handleErrors(errorController))
 
 // File Not Found Route - must be last route in list
@@ -74,12 +74,11 @@ app.use(async (req, res, next) => {
 
 /* ***********************
 * Express Error Handler
-* Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  let message = err.status === 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?'
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
@@ -88,15 +87,14 @@ app.use(async (err, req, res, next) => {
 })
 
 /* ***********************
- * Local Server Information
- * Values from .env (environment) file
- *************************/
+* Local Server Information
+*************************/
 const port = process.env.PORT
 const host = process.env.HOST
 
 /* ***********************
- * Log statement to confirm server operation
- *************************/
+* Log statement to confirm server operation
+*************************/
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
