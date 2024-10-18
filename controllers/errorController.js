@@ -1,5 +1,14 @@
-// controllers/errorController.js
-exports.intentionalError = (req, res) => {
-    // This will trigger the error handler
-    throw new Error("This is a deliberate error to test error handling.");
-};
+const utilities = require("../utilities/")
+
+const errorController = {}
+
+errorController.build500Page = async function(req, res){
+    const nav = await utilities.getNav()
+    res.render("./errors/error500", {
+        title: className + ":: Server Error ::",
+        nav,
+        grid
+    })
+}
+
+module.exports = errorController

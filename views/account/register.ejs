@@ -1,70 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/register.css"> <!-- Link to your CSS file -->
-</head>
-<body>
-    <header>
-        <h1><%= title %></h1>
-        <% if (Array.isArray(messages) && messages.length > 0) { %>
-            <div class="flash-message">
-                <% messages.forEach(message => { %>
-                    <p><%= message %></p>
-                <% }) %>
-            </div>
-        <% } %>
-        
+<!-- Set title if exists -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
 
-        
-    </header>
-    
-    <main>
-        <div class="container">
-            <form action="/account/register" method="post" id="registration-form">
-                <div>
-                    <label for="firstName">First Name:</label>
-                    <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>" />
-                </div>
-                <div>
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>" />
-                </div>
-                <div>
-                    <label for="email">Email Address:</label>
-                    <input type="email" name="account_email" id="accountEmail" required value="<%= locals.account_email %>" />
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, and 1 special character.</span>
-                    <input type="password" id="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" data-trail="password" />
-                    <div style="display: flex; align-items: center; margin-top: 5px;">
-                        <input type="checkbox" id="toggle-password" onclick="togglePassword()" style="margin-right: 5px;">
-                        <label for="toggle-password">Show Password</label>
-                    </div>
-                </div>
-                <p>
-                    <strong>Requirements:</strong>
-                    <ul>
-                        <li>12 characters minimum</li>
-                        <li>At least 1 capital letter</li>
-                        <li>At least 1 number</li>
-                        <li>At least 1 special character</li>
-                    </ul>
-                </p>
-                <button type="submit">Register</button>
-            </form>
-        </div>
-    </main>
-    
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleCheckbox = document.getElementById('toggle-password');
-            passwordInput.type = toggleCheckbox.checked ? 'text' : 'password';
-        }
-    </script>
-</body>
-</html>
+<%- include('../account-partials/register-form') %>

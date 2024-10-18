@@ -1,43 +1,29 @@
-const express = require("express");
-const router = new express.Router();
-const invController = require("../controllers/invController");
-const utilities = require('../utilities'); // Verifique se o caminho está correto
+// Needed Resources 
+const express = require("express")
+const router = new express.Router() 
+const invController = require("../controllers/invController")
+const errorController = require("../controllers/errorController")
+const utilities = require("../utilities")
+const invValidate = require('../utilities/inventory-validation')
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
-// Route to display details of a specific vehicle
-router.get("/vehicle/:vehicleId", invController.displayVehicleDetails); 
+// Inventory management
+router.get("/", utilities.handleErrors(invController.buildInvManagement));
+router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+// add new classification
+router.post('/process-add-classification',
+    invValidate.classificationRules(),
+    utilities.handleErrors(invValidate.checkClassification),
+    utilities.handleErrors(invController.processAddNewClassification))
+//router.get("/add-classification", (req, res) => {res.send("connected")});
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
 
-// Route to trigger a 500 error
-router.get('/trigger-error', (req, res) => {
-    throw new Error("This is a deliberate error to test error handling.");
-});
+// Route to build 500 error page
+router.get("/err", utilities.handleErrors(errorController.build500Page));
 
-// Route to display the inventory management view
-router.get('/inv/', invController.managementView);
-
-// Route to add a new classification
-router.get('/inv/add-classification', invController.addClassificationView);
-
-// Route to process adding a new classification
-router.post('/inv/add-classification', invController.processAddClassification);
-
-// Route to add a new inventory item
-router.get('/inv/add-inventory', invController.addInventoryView);
-
-// Route to process adding a new inventory item
-router.post('/inv/add-inventory', invController.processAddInventory); 
-
-// New route to get inventory based on classification ID
-router.get("/inv/getinventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
-
-// New route for editing inventory items
-// Route to display the edit view for a specific inventory item
-router.get("/inv/edit/:inventory_id", utilities.handleErrors(invController.editInventoryView)); // Add the new route
-
-// New route to update an inventory item
-// Route to process updating an inventory item
-router.post("/inv/update/", utilities.handleErrors(invController.updateInventory)); // Add this new route
+// Route to build inventory item by id
+router.get("/:inventoryId", utilities.handleErrors(invController.buildByInventoryId));
 
 module.exports = router;

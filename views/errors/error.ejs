@@ -1,25 +1,9 @@
-<!-- views/error.ejs -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title || 'Error' %></title> <!-- Default title if not provided -->
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
-</head>
-<body>
-    <!-- Content Heading Section -->
-    <% if (title) { %>
-        <h1><%= title %></h1>
-    <% } else { %>
-        <h1>Error</h1> <!-- Default heading for error -->
-    <% } %>
-
-    <!-- Error Details Section -->
-    <h2>Error Details:</h2>
-    <p><%- message %></p> <!-- This uses <%- to safely render unescaped HTML -->
-
-    <!-- Link to go back to home page -->
-    <a href="/">Go Back Home</a>
-</body>
-</html>
+<!-- Basic Error Handling -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+    <!-- Message output -->
+    <%- message %>

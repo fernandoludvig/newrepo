@@ -1,36 +1,29 @@
-const express = require('express');
-const router = express.Router();
-const utilities = require('../utilities/index'); // Ensure the path is correct
-const accountController = require('../controllers/accountController'); // Ensure the path is correct
-const regValidate = require('../utilities/account-validation'); // Import validation module
+// Needed Resources 
+const express = require("express")
+const router = new express.Router() 
+const accountCont = require("../controllers/accountController")
+const utilities = require("../utilities")
+const regValidate = require('../utilities/account-validation')
 
-// GET route for the "My Account" page
-router.get('/', 
-    utilities.checkLogin, // Add checkLogin middleware here
-    utilities.handleErrors(accountController.buildAccountManagement) // Use the correct controller function for account management
-);
-
-// GET route for the login page
-router.get('/login', utilities.handleErrors(accountController.buildLogin));
-
-// POST route to handle login form submission
+// Route to build login view
+router.get("/login", utilities.handleErrors(accountCont.buildLogin));
+// Route to build register view
+router.get("/register", utilities.handleErrors(accountCont.buildRegister));
+// Post new account information
 router.post(
-  '/login',
-  regValidate.loginRules(), // Apply validation rules
-  regValidate.checkLoginData, // Check data for errors
-  utilities.handleErrors(accountController.processLogin) // Process login
-);
-
-// GET route for the registration page
-router.get('/register', utilities.handleErrors(accountController.buildRegister));
-
-// POST route to handle registration form submission
+    '/register', 
+    regValidate.registationRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(accountCont.registerAccount)
+)
+// Process the login attempt
 router.post(
-  "/register",
-  regValidate.registrationRules(), // Apply validation rules
-  regValidate.checkRegData,        // Check data for errors
-  utilities.handleErrors(accountController.registerAccount) // Handle registration
-);
+    "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    (req, res) => {
+      res.status(200).send('login process')
+    }
+  )
 
-// Export the router
 module.exports = router;

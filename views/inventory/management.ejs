@@ -1,51 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management</title>
-    <link rel="stylesheet" href="/path/to/your/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Inventory Management</h1>
-    </header>
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
 
-    <!-- Flash messages -->
-    <% if (typeof messages !== 'undefined') { %>
-        <section class="messages">
-            <p><%= messages %></p>
-        </section>
-    <% } %>
-
-    <!-- Links to add new classification and inventory -->
-    <section class="management-links">
-        <ul>
-            <li><a href="/inv/add-classification">Add New Classification</a></li>
-            <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
-        </ul>
-    </section>
-
-    <h2>Manage Inventory</h2>
-    <p>Select a classification from the list to see the items belonging to the classification.</p>
-
-    <% if (classificationList && classificationList.length > 0) { %>
-        <select id="classificationSelect">
-            <option value="">-- Select a Classification --</option>
-            <% classificationList.forEach(classification => { %>
-                <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
-            <% }); %>
-        </select>
-    <% } %>
-
-    <table id="inventoryDisplay"></table>
-
-    <noscript>JavaScript must be enabled to use this page.</noscript>
-
-    <footer>
-        <% include('../partials/footer') %>
-    </footer>
-
-    <script src="../../js/inventory.js"></script>
-</body>
-</html>
+<%- include('../inventory-partials/management-partial') %>
