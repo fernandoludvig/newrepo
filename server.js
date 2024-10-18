@@ -12,6 +12,7 @@ const env = require("dotenv").config();
 const session = require("express-session"); // Added session
 const pool = require('./database/'); // Added database connection
 const bodyParser = require("body-parser"); // Added body-parser
+const cookieParser = require("cookie-parser"); // Added cookie-parser
 const app = express();
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
@@ -21,8 +22,8 @@ const utilities = require("./utilities/"); // Ensure the utilities file is being
 const errorHandler = require("./middleware/errorHandler"); // Import your error handler
 
 /* ***********************
- * Middleware
- ************************/
+* Middleware
+************************/
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -44,6 +45,13 @@ app.use(function(req, res, next){
 // Body parser middleware
 app.use(bodyParser.json()); // For parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+
+// Cookie parser middleware
+app.use(cookieParser()); // Added cookie parser
+
+// Middleware to check JWT token
+app.use(utilities.checkJWTToken); // Add this line
+
 
 /* ***********************
  * View Engine and Templates

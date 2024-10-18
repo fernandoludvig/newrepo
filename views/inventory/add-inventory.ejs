@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+    <title>Edit Inventory Item</title>
+    <link rel="stylesheet" href="/styles.css">
     <script>
         // Client-side validation
         function validateForm() {
@@ -23,7 +23,7 @@
 </head>
 <body>
     <header>
-        <h1><%= title %></h1>
+        <h1>Edit Inventory Item</h1>
     </header>
 
     <main>
@@ -33,18 +33,18 @@
             </div>
         <% } %>
 
-        <form action="/inv/add-inventory" method="POST" onsubmit="return validateForm();">
+        <form action="/inv/update" method="POST" onsubmit="return validateForm();">
             <label for="inv_make">Make:</label>
-            <input type="text" id="inv_make" name="inv_make" value="<%= vehicle ? vehicle.inv_make : '' %>" required>
+            <input type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" required>
 
             <label for="inv_model">Model:</label>
-            <input type="text" id="inv_model" name="inv_model" value="<%= vehicle ? vehicle.inv_model : '' %>" required>
+            <input type="text" id="inv_model" name="inv_model" value="<%= inv_model %>" required>
 
             <label for="inv_year">Year:</label>
-            <input type="number" id="inv_year" name="inv_year" min="1900" max="2024" value="<%= vehicle ? vehicle.inv_year : '' %>" required>
+            <input type="number" id="inv_year" name="inv_year" min="1900" max="2024" value="<%= inv_year %>" required>
 
             <label for="classificationList">Classification:</label>
-            <%= classificationList %> <!-- This will be replaced by the classification dropdown -->
+            <%= classificationList %>
 
             <label for="inv_image">Image Path:</label>
             <input type="text" id="inv_image" name="inv_image" value="/images/no-image.png" required>
@@ -52,7 +52,12 @@
             <label for="inv_thumbnail">Thumbnail Path:</label>
             <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="/images/no-image-thumbnail.png" required>
 
-            <button type="submit">Add Vehicle</button>
+            <!-- Hidden input for inventory ID -->
+            <input type="hidden" name="inv_id"
+            <% if (inv_id) { %> value="<%= inv_id %>"
+            <% } %>>
+
+            <button type="submit">Update Vehicle</button>
         </form>
 
         <% if (errorMessages.length > 0) { %>

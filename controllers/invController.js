@@ -55,20 +55,23 @@ invCont.displayVehicleDetails = async (req, res) => {
  * ************************** */
 invCont.managementView = async (req, res) => {
     try {
-        let nav = await utilities.getNav(); // Obtenha a navegação aqui
-        const messages = req.flash('info'); // Lida com mensagens flash, se houver
+        let nav = await utilities.getNav(); // Get the navigation HTML
+        const messages = req.flash('info'); // Handle flash messages, if any
+        
+        // Create space between navigation and render
+        const classificationSelect = await utilities.buildClassificationList(); // Create the select list for classifications
 
         res.render("./inventory/management", {
             title: "Inventory Management",
-            nav, // Passe a navegação para a view
+            nav, // Pass the navigation to the view
             messages,
+            classificationSelect // Add classification select list to the render data object
         });
     } catch (error) {
         console.error("Error rendering management view:", error);
         res.status(500).send("Server error");
     }
 };
-
 
 /* ***************************
  * Add Classification and Add Inventory View
@@ -97,6 +100,42 @@ invCont.addInventoryView = async (req, res) => {
         res.status(500).send("Server error");
     }
 };
+
+/* ***************************
+ *  Build edit inventory view
+ * ************************** */
+invCont.editInventoryView = async function (req, res, next) {
+    const inv_id = parseInt(req.params.inv_id); // Collect and store the incoming inventory ID
+    let nav = await utilities.getNav(); // Build navigation
+    const itemData = await invModel.getInventoryById(inv_id); // Get the inventory item data by ID
+
+    // Check if item data is retrieved
+    if (!itemData) {
+        return res.status(404).send("Inventory item not found.");
+    }
+
+    const classificationSelect = await utilities.buildClassificationList(itemData.classification_id); // Get the classification list
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`; // Construct item name for title
+
+    // Render the edit inventory view
+    res.render("./inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        classificationSelect: classificationSelect,
+        errors: null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_description: itemData.inv_description,
+        inv_image: itemData.inv_image,
+        inv_thumbnail: itemData.inv_thumbnail,
+        inv_price: itemData.inv_price,
+        inv_miles: itemData.inv_miles,
+        inv_color: itemData.inv_color,
+        classification_id: itemData.classification_id
+    });
+}
 
 /* ***************************
  * Process Adding a New Classification
@@ -161,6 +200,20 @@ invCont.processAddInventory = async (req, res) => {
         console.error("Error adding inventory item:", error);
         req.flash('error', ['Failed to add inventory item. Please try again.']); // Flash message for failure
         res.redirect('/inv/add-inventory'); // Redirect back to the add inventory page
+    }
+};
+
+/* ***************************
+ * Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+    const classification_id = parseInt(req.params.classification_id);
+    const invData = await invModel.getInventoryByClassificationId(classification_id); // Fetch inventory data based on classification ID
+    
+    if (invData[0] && invData[0].inv_id) {
+        return res.json(invData); // Return inventory data as JSON
+    } else {
+        next(new Error("No data returned")); // Handle the error if no data is found
     }
 };
 

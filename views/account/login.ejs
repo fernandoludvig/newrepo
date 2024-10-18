@@ -19,7 +19,8 @@
             </div>
         <% } %>
 
-        <form action="/login" method="POST"> <!-- Ensure this matches your login route -->
+        <!-- Ensure the form action and method are correct -->
+        <form id="loginForm" action="/account/login" method="POST"> <!-- Updated action to match login route -->
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="account_email" required aria-label="Email" placeholder="Enter your email">
@@ -39,7 +40,6 @@
                 </div>
             </div>
             
-                      
             <button type="submit">Login</button>
         </form>
 

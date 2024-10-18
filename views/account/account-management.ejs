@@ -1,0 +1,27 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<main>
+  <h1>Account Management</h1>
+
+  <!-- Display flash messages if any -->
+  <% if (messages && messages.length > 0) { %>
+    <div class="flash-messages">
+      <% messages.forEach(function(message) { %>
+        <p><%= message %></p>
+      <% }); %>
+    </div>
+  <% } %>
+
+  <!-- Display any errors -->
+  <% if (errors) { %>
+    <div class="error">
+      <p><%= errors %></p>
+    </div>
+  <% } %>
+
+  <!-- Main content -->
+  <p>You're logged in.</p>
+</main>
+
+<%- include('../partials/footer.ejs') %>

@@ -26,9 +26,26 @@
         </ul>
     </section>
 
+    <h2>Manage Inventory</h2>
+    <p>Select a classification from the list to see the items belonging to the classification.</p>
+
+    <% if (classificationList && classificationList.length > 0) { %>
+        <select id="classificationSelect">
+            <option value="">-- Select a Classification --</option>
+            <% classificationList.forEach(classification => { %>
+                <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
+            <% }); %>
+        </select>
+    <% } %>
+
+    <table id="inventoryDisplay"></table>
+
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+
     <footer>
-        <!-- Include common footer partial if available -->
         <% include('../partials/footer') %>
     </footer>
+
+    <script src="../../js/inventory.js"></script>
 </body>
 </html>

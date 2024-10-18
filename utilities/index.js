@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -88,5 +90,43 @@ exports.wrapVehicleDataInHTML = (vehicle) => {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) { // Check if JWT exists in cookies
+    jwt.verify(
+      req.cookies.jwt, // The token from the cookie
+      process.env.ACCESS_TOKEN_SECRET, // The secret key from the .env file
+      function (err, accountData) { // Callback function
+        if (err) { // If token verification fails
+          req.flash("notice", "Please log in"); // Flash a notice message
+          res.clearCookie("jwt"); // Clear the invalid JWT
+          return res.redirect("/account/login"); // Redirect to login page
+        }
+        res.locals.accountData = accountData; // Save the account data in res.locals
+        res.locals.loggedin = 1; // Set a logged-in flag
+        next(); // Proceed to the next middleware or route handler
+      }
+    );
+  } else {
+    next(); // Proceed if no JWT cookie is found
+  }
+};
+
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
 
 module.exports = Util; // Export utility functions
