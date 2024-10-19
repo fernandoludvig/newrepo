@@ -1,10 +1,10 @@
-// routes/errorRoutes.js
-const express = require('express');
-const { intentionalError } = require('../controllers/errorController'); // Ensure this path is correct
+// Needed Resources 
+const express = require("express")
+const router = new express.Router() 
+const errorController = require("../controllers/errorController")
+const utilities = require("../utilities/")
 
-const router = express.Router();
-
-// Route to trigger the intentional error
-router.get('/trigger-error', intentionalError);
+// Route to handle footer error
+router.get("/triggerError", utilities.handleErrors(errorController.triggerError));
 
 module.exports = router;
