@@ -2,11 +2,29 @@
     <div class="management-div">
         <%- messages() %>
         <% if (errors) { %>
-        <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li><%= error.msg %></li>
-        <%  }) %>
-        </ul>
+            <ul class="notice">
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <% if (user) { %>
+            <h2>Welcome <%= user.firstName %></h2>
+
+            <% if (user.accountType === 'Employee' || user.accountType === 'Admin') { %>
+                <h3>Inventory Management</h3>
+                <p>
+                    <a href="/inv/manage" class="btn btn-primary">Access Inventory Management</a>
+                </p>
+            <% } %>
+
+            <p>
+                <a href="/account/update/<%= user.id %>" class="btn btn-secondary">Update Account Information</a>
+            </p>
+
+        <% } else { %>
+            <p>Please log in to manage your account.</p>
         <% } %>
 
         <div class="button-div">
