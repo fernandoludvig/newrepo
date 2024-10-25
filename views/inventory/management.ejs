@@ -1,8 +1,24 @@
 <!-- Content Heading -->
+
 <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-      res.redirect('/')
+  <h1><%= title %></h1>
+  <% } else {
+    res.redirect('/')
 } %>
 
-<%- include('../inventory-partials/management-partial') %>
+<%- messages() %>
+
+<!-- Vehicle Management Display -->
+<p><a href="/inv/add-classification">Add new classification</a></p>
+<p><a href="/inv/add-vehicle">Add new vehicle</a></p>
+
+<h2>Manage Inventory</h2>
+<p>Select a classification from the list to see it's items.</p>
+
+<!-- Classification List Select -->
+<%- classificationSelect %>
+
+<table id="inventoryDisplay"></table>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+<script src="../../js/inventory.js"></script>

@@ -1,0 +1,30 @@
+<!-- Content Heading -->
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+<ul class="notice">
+<% errors.array().forEach(error => { %>
+ <li><%= error.msg %></li>
+<%  }) %>
+</ul>
+<% } %>
+
+<!-- Account Management -->
+
+<h2>Welcome, <%= accountData.account_firstname %></h2>
+
+<p>You're logged in.</p>
+
+<p><a href="/account/update/<%= accountData.account_id %>">Edit Account Information</a></p>
+
+<% if (authorizedUser) { %>
+<h3>Inventory Management</h3>
+<p><a href="/inv">Manage Inventory</a></p>
+<% } %>

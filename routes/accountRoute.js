@@ -2,76 +2,59 @@
 const express = require("express")
 const router = new express.Router() 
 const accountController = require("../controllers/accountController")
-const utilities = require("../utilities")
-const regValidate = require('../utilities/account-validation')
+const utilities = require("../utilities/")
+const accountValidate = require('../utilities/account-validation')
 
-// Deliver Login View
+// Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
-// Deliver register View
+// Route to registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
-// Process the logout request, Week 5
-router.get("/logout", utilities.handleErrors(accountController.accountLogout));
+// Route to the account management view
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
 
+// Route to the account update view
+router.get("/update/:accountId", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountUpdate))
 
+// Add the logout route
+router.get("/logout", (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+});
 
-// Process the registration data, Unit 4 server-side activity
+// Route to process account update
 router.post(
-  "/register",
-  regValidate.registrationRules(),
-  regValidate.checkRegData,
-  utilities.handleErrors(accountController.registerAccount)
+    "/update",
+    utilities.checkLogin,
+    accountValidate.updateAccountRules(),
+    accountValidate.checkUpdateAccountData,
+    utilities.handleErrors(accountController.updateAccount)
 )
 
-/* **********************
- *  Process the login request 
-    Unit 4, server-side activity
-    Modified in Unit 5, Login Process Activity
-// * ********************* */
+// Route to process account password change
 router.post(
-  "/login",
-  regValidate.loginRules(),
-  regValidate.checkLoginData,
-  utilities.handleErrors(accountController.accountLogin)
+    "/update-password",
+    utilities.checkLogin,
+    accountValidate.changePasswordRules(),
+    accountValidate.checkChangePasswordData,
+    utilities.handleErrors(accountController.changePassword)
 )
 
-// Deliver Account Management View
-// Week 5, Individual Activity done in Group
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
+// Route to process registration
+router.post(
+    "/register",
+    accountValidate.registationRules(),
+    accountValidate.checkRegData,
+    utilities.handleErrors(accountController.registerAccount)
+)
 
+// Process the login attempt
+router.post(
+    "/login",
+    accountValidate.loginRules(),
+    accountValidate.checkLoginData,
+    utilities.handleErrors(accountController.accountLogin)
+  )
 
-
-
-// Deliver Account Update View, Week 5
-router.get("/update/:account_id", utilities.handleErrors(accountController.buildAccountUpdateView));
-
-
-/* **********************
- *  Process update account information request 
-    Unit 6
-// * ********************* */
-//router.post(
-//  "/update", 
-//  validator.updateRules(),
-//  validator.checkUpdateAccount,
-//  utilities.handleErrors(accountController.updateAccount)
-//  )
-//
-///* **********************
-// *  Process the password update request 
-//    Unit 6
-//// * ********************* */
-//router.post(
-//    "/update-password/", 
-//    validator.passwordRules(),
-//    utilities.handleErrors(accountController.updatePassword)
-//    )
-
-
-
-
-
-
-module.exports = router
-  
+module.exports = router;

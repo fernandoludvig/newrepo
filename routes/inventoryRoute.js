@@ -1,61 +1,71 @@
 // Needed Resources 
 const express = require("express")
-const router = new express.Router()
+const router = new express.Router() 
 const invController = require("../controllers/invController")
-const utilities = require("../utilities")
-const validate = require('../utilities/inventory-validation')
+const utilities = require("../utilities/")
+const invValidate = require('../utilities/inventory-validation')
+
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
-// Route to build inventory detail view
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByInventoryId));
+// Route to build a specific vehicle detail view
+router.get("/detail/:invId", utilities.handleErrors(invController.buildVehicleDetail));
 
-// Route to build management view, Unit 4 Individual Activity
-router.get("/", utilities.handleErrors(invController.buildManagement));
+// Route to inventory management view
+router.get("", utilities.checkAuthorization, utilities.handleErrors(invController.buildInventoryManagement));
 
-// Route to build add classification detail view, Unit 4 Individual Activity
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+// Route to add classification view
+router.get("/add-classification", utilities.checkAuthorization, utilities.handleErrors(invController.buildAddClassification));
 
-// Route to build add inventory detail view, Unit 4 Individual Activity
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
+// Route to add vehicle view
+router.get("/add-vehicle", utilities.checkAuthorization, utilities.handleErrors(invController.buildAddVehicle));
 
-// Route to get inventory for AJAXroute. Week 5, AJAX Select Inventory Activity
+// Route to edit vehicle view
+router.get("/edit/:invId", utilities.checkAuthorization, utilities.handleErrors(invController.buildEditVehicle));
+
+// Route to delete vehicle view
+router.get("/delete/:invId", utilities.checkAuthorization, utilities.handleErrors(invController.buildDeleteVehicle));
+
+// Route to get inventory by classification
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
-// Route to edit the inventory form. Week 5, Update Inventory item (Step 1) 
-router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
- 
-// Route to delete the inventory form. Week 5, Team Activity
-router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView));
-
-// Process the Add Classification data, Unit 4 Individual Activity
+// Route to process edit vehicle
 router.post(
-  "/add-classification",
-  validate.classificationRules(),
-  validate.checkClassificationData,
-  utilities.handleErrors(invController.addClassification)
+    "/update/",
+    utilities.checkAuthorization,
+    invValidate.addVehicleRules(),
+    invValidate.checkUpdateVehicleData,
+    utilities.handleErrors(invController.updateInventory)
 )
 
-
-// Process the Add Inventory data, Unit 4 Individual Activity
+// Route to process delete vehicle
 router.post(
-  "/add-inventory",
-  validate.inventoryRules(),
-  validate.checkInventoryData,
-  utilities.handleErrors(invController.addInventory)
+    "/delete/",
+     
+    utilities.checkAuthorization,
+    utilities.handleErrors(invController.deleteInventory)
 )
 
-// Route to update the inventory form. Week 5, Update Inventory item (Step 2) 
- router.post(
-   "/update/",
-   validate.newInventoryRules(),
-   validate.checkUpdateData,
-   utilities.handleErrors(invController.updateInventory))
-
-// Route to delete the inventory form. Week 5, Update Inventory item (Step 2) 
+// Route to process add classification
 router.post(
-  "/delete/",
-  utilities.handleErrors(invController.deleteInventory));
+    "/add-classification",
+    
+    utilities.checkAuthorization,
+    invValidate.addClassificationRules(),
+    invValidate.checkAddClassificationData,
+    utilities.handleErrors(invController.processAddClassification)
+)
+
+// Route to process add vehicle
+router.post(
+    "/add-vehicle",
+    
+    utilities.checkAuthorization,
+    invValidate.addVehicleRules(),
+    invValidate.checkAddVehicleData,
+    utilities.handleErrors(invController.processAddVehicle)
+)
+
 
 module.exports = router;

@@ -1,0 +1,62 @@
+<!-- Content Heading -->
+
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+    res.redirect('/')
+} %>
+  
+<%- messages() %>
+  
+<% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+<% } %>
+
+<!-- Add Vehicle View -->
+<form action="/inv/add-vehicle" method="post">
+    <label for="classification_id">Classification:</label>
+    <br>
+    <%- classificationSelect %>
+    <br>
+    <label for="make">Make:</label>
+    <br>
+    <input type="text" name="inv_make" id="make" required value="<%= locals.inv_make %>">
+    <br>
+    <label for="model">Model:</label>
+    <br>
+    <input type="text" name="inv_model" id="model" required value="<%= locals.inv_model %>">
+    <br>
+    <label for="year">Year:</label>
+    <br>
+    <input type="number" name="inv_year" id="year" required value="<%= locals.inv_year %>">
+    <br>
+    <label for="description">Description:</label>
+    <br>
+    <input type="text" name="inv_description" id="description" required value="<%= locals.inv_description %>">
+    <br>
+    <label for="price">Price:</label>
+    <br>
+    <input type="number" name="inv_price" id="price" required value="<%= locals.inv_price %>">
+    <br>
+    <label for="mileage">Mileage:</label>
+    <br>
+    <input type="number" name="inv_miles" id="mileage" required value="<%= locals.inv_miles %>">
+    <br>
+    <label for="image">Image:</label>
+    <br>
+    <input type="text" name="inv_image" id="image" placeholder="Default: No image" value="<%= locals.inv_image %>">
+    <br>
+    <label for="thumbnail">Thumbnail:</label>
+    <br>
+    <input type="text" name="inv_thumbnail" id="thumbnail" placeholder="Default: No image" value="<%= locals.inv_thumbnail %>">
+    <br>
+    <label for="color">Color:</label>
+    <br>
+    <input type="text" name="inv_color" id="color" required value="<%= locals.inv_color %>">
+    <br>
+    <input type="submit" value="Add Vehicle">
+</form>

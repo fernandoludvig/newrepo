@@ -8,17 +8,17 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
+const app = express()
 const static = require("./routes/static")
+const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
-const errorRoute = require('./routes/errorRoutes');
-const cookieParser = require("cookie-parser")
+const cookieParser = require('cookie-parser')
 
-const app = express()
 
 /* ***********************
  * Middleware
@@ -34,7 +34,6 @@ app.use(session({
   name: 'sessionId',
 }))
 
-
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
@@ -42,15 +41,10 @@ app.use(function(req, res, next){
   next()
 })
 
-
-// Week 4, Process Registration View
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-// Week 5, Login Process Activity
 app.use(cookieParser())
-
-// Week 5, Login Process Activity
 app.use(utilities.checkJWTToken)
 
 /* ***********************
@@ -69,18 +63,15 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
-app.use("/inv", inventoryRoute)
+app.use("/inv", utilities.handleErrors(inventoryRoute))
 
-// Error routes -- week 3, Individual Activity
-app.use('/error', errorRoute);
-
-// Account routes - Week 4, Learning Activity
-app.use("/account", require("./routes/accountRoute"))
+// Account routes
+app.use("/account", utilities.handleErrors(accountRoute))
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
+  next({status: 404, message: "Slow down, Speed Racer! That page does not exist."});
+});
 
 /* ***********************
 * Express Error Handler
