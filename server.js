@@ -18,6 +18,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
 const cookieParser = require('cookie-parser')
+const CommentController = require("./controllers/commentController")
 
 
 /* ***********************
@@ -95,6 +96,12 @@ app.use(async (err, req, res, next) => {
  *************************/
 const port = process.env.PORT
 const host = process.env.HOST
+
+
+app.post('/comments', CommentController.createComment);
+app.get('/comments/:item_id', CommentController.getCommentsByItemId);
+
+
 
 /* ***********************
  * Log statement to confirm server operation

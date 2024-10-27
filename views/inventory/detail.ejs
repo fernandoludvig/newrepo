@@ -1,12 +1,36 @@
 <!-- Content Heading -->
-
 <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-    res.redirect('/')
-  } %>
-      
-  <%- messages() %>
-      
-  <!-- Vehicle Details Display -->
-  <%- detail %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <h1>Detalhes do Veículo</h1>
+<% } %>
+
+<%- messages() %>
+
+<!-- Vehicle Details Display -->
+<%- detail %>
+
+<!-- Comments Section -->
+<h2>Comments</h2>
+
+<!-- Form to add a new comment -->
+<form action="/comments" method="POST">
+  <input type="hidden" name="user_id" value="<%= user_id %>">
+  <input type="hidden" name="item_id" value="<%= detail.inv_id %>">
+  <textarea name="content" required placeholder="Leave your comment here"></textarea>
+  <button type="submit">Submit Comment</button>
+</form>
+
+<!-- Display of Existing Comments -->
+<div class="comments">
+  <% if (comments && comments.length > 0) { %>
+      <% comments.forEach(comment => { %>
+          <div class="comment">
+              <p><strong>User <%= comment.user_id %>:</strong> <%= comment.content %></p>
+              <p><em>Submitted on <%= comment.created_at %></em></p>
+          </div>
+      <% }); %>
+  <% } else { %>
+      <p>No comments yet.</p>
+  <% } %>
+</div>

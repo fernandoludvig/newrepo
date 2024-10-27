@@ -369,3 +369,61 @@ input:invalid {
   background-color: #ccc;
   color: #333;
 }
+
+/************ Comments Section ***************/
+
+.comments {
+  margin-top: 2em;
+  padding: 1em;
+  background-color: #f9f9f9; /* Light gray background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px;
+}
+
+.comment {
+  padding: 10px;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #eee; /* Subtle line between comments */
+}
+
+.comment p {
+  margin: 0.5em 0;
+}
+
+.comment strong {
+  color: rgb(11, 220, 248); /* Accent color for user name */
+}
+
+form {
+  margin: 1.5em 0;
+  padding: 1em;
+  background-color: #fff; /* White background for the form */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+form textarea {
+  width: 100%;
+  padding: 10px; /* Padding for textarea */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+form button {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 10px 20px;
+  background-color: rgb(11, 220, 248); /* Button color */
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+form button:hover {
+  background-color: #009ac8; /* Darker shade on hover */
+}
